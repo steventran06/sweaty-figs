@@ -78,11 +78,6 @@ export class Search extends React.Component {
     );
   }
 
-
-  testing() {
-    this.props.actions.testPlan();
-  }
-
   triggerAPItest() {
     console.log('triggering API test');
     // this.props.actions.searchActivities('ethio', 'san francisco', activities => console.log(activities));
@@ -142,7 +137,6 @@ export class Search extends React.Component {
         <button onClick={this.triggerAPItest.bind(this)}>test API</button>
         <div className="row">
           <div className="col-sm-5">
-          <button onClick={this.testing.bind(this)}>TEST BUTTON</button>
           </div>
           <div className="col-sm-2">
             {this.state.geolocation ? spinner : null}

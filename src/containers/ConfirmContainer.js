@@ -8,7 +8,8 @@ import { addToBuilder,
         editDescription,
         createPlan } from '../actions';
 import { bindActionCreators } from 'redux';
-import ConfirmItem from '../components/ConfirmItem'
+import ConfirmItem from '../components/ConfirmItem';
+import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import Card from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -16,12 +17,18 @@ import FlatButton from 'material-ui/FlatButton';
 var shortid = require('shortid');
 
 export class ConfirmContainer extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      planTitle: ''
+      planTitle: '',
+      modalOpen: false
     };
+  }
+
+  toggleModal() {
+    this.setState({
+      modalOpen: !this.state.modalOpen
+    });
   }
 
   handleTitle(event) {
@@ -33,6 +40,17 @@ export class ConfirmContainer extends Component {
       
   //   }
   // }
+
+  saveItinerary() {
+    this.props.createPlan(Object.assign({}, {
+      user_id: auth.token.user_id,
+      clientside_id: shortid.generate(),
+      title: this.state.planTitle,
+      desc: '',
+      likes: 0
+    }), activityIds, (response) => console.log('saved to db, response: ', response));
+    this.toggleModal();
+  }
 
   render() {
     const { planBuilder, auth } = this.props;
@@ -74,15 +92,13 @@ export class ConfirmContainer extends Component {
         )}
         </div>
         <FlatButton
-          onClick={() => this.props.createPlan(Object.assign({}, {
-            user_id: auth.token.user_id,
-            clientside_id: shortid.generate(),
-            title: this.state.planTitle,
-            desc: '',
-            likes: 0
-          }), activityIds, response => console.log('saved to db, response: ', response))}>
+          onClick={this.saveItinerary.bind(this)}>
           Save Itinerary
         </FlatButton>
+        <Dialog
+          open={this.state.modalOpen}>
+          Hello
+        </Dialog>
       </Card>
     )
   }
