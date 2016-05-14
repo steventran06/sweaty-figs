@@ -82,7 +82,10 @@ export class ConfirmContainer extends Component {
   }
 
   emailPlan() {
-    window.open(`mailto:${this.state.emails.join(',')}?Subject=${this.state.planTitle}`);
+    const { planBuilder } = this.props;
+    console.log(planBuilder);
+    var bodyText = planBuilder.map((item) => [item.title, "Address: " + item.address, item.city + ", " + item.state].join('%0D%0A')).join('%0D%0A');
+    window.open(`mailto:${this.state.emails.join(',')}?subject=${this.state.planTitle}&body=${bodyText}`);
   }
 
 
