@@ -153,6 +153,7 @@ export class ConfirmContainer extends Component {
               <div className="container">
               <div className="row">
                 <h3>Share with your Facebook friends</h3>
+                <p>add link here</p>
               </div>
                 <div className="row">
                   <h3>Email your itinerary to your friends!</h3>
@@ -190,7 +191,6 @@ export class ConfirmContainer extends Component {
       </Card>
     )
   }
-
 }
 
 const mapStateToProps = (state) => {
