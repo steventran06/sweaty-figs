@@ -13,7 +13,6 @@ var shortid = require('shortid');
 class DBResultsContainer extends Component {
   render() {
     const { dbactivities, auth } = this.props;
-    console.log('dbActivities in DBResultsContainer', dbactivities);
     const hasdbActivities = dbactivities.length > 0;
     if (hasdbActivities && dbactivities[0].distance) {
       dbactivities.sort((a, b) => parseFloat(a.distance) > parseFloat(b.distance));
@@ -24,7 +23,7 @@ class DBResultsContainer extends Component {
         <Card>
           {!hasdbActivities ? <em>0 search results</em> :
             dbactivities.map((activity, index) => {
-              if (true) {
+              if (activity.visArea && activity.visCuisine && activity.visBudget) {
                 return <ActivityItem
                   key={index}
                   activity={activity}
